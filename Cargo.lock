@@ -1,0 +1,4 @@
+[root]
+name = "rpi-management-api"
+version = "0.1.0"
+
