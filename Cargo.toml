@@ -2,3 +2,6 @@
 name = "rpi-management-api"
 version = "0.1.0"
 authors = ["Damien Lecan <dev@dlecan.com>"]
+
+[dependencies]
+rustless = "0.7.0"
