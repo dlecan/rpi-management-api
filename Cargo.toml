@@ -4,4 +4,5 @@ version = "0.1.0"
 authors = ["Damien Lecan <dev@dlecan.com>"]
 
 [dependencies]
-rustless = "0.7.0"
+rustless = { git = "https://github.com/rustless/rustless" }
+#cookie = "0.1.21"
