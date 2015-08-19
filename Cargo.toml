@@ -5,4 +5,7 @@ authors = ["Damien Lecan <dev@dlecan.com>"]
 
 [dependencies]
 rustless = { git = "https://github.com/rustless/rustless" }
-#cookie = "0.1.21"
+rustc-serialize = "*"
+hyper = "*"
+iron = "*"
+valico = "*"
