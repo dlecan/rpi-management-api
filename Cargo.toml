@@ -6,6 +6,12 @@ authors = ["Damien Lecan <dev@dlecan.com>"]
 [dependencies]
 rustless = { git = "https://github.com/rustless/rustless" }
 rustc-serialize = "*"
-hyper = "*"
-iron = "*"
 valico = "*"
+
+[dependencies.hyper]
+version = "*"
+default-features = false
+
+[dependencies.iron]
+version = "*"
+default-features = false
