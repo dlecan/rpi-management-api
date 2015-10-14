@@ -19,6 +19,13 @@ fn main() {
 
   let api = Api::build(|api| {
 
+    api.get("ping", |endpoint| {
+      endpoint.handle(|mut client, params| {
+        client.set_header(AccessControlAllowOrigin::Any);
+        client.empty()
+      })
+    });
+
     api.post("shutdown", |endpoint| {
         endpoint.handle(|mut client, params| {
             println!("Shutdown requested");
@@ -29,8 +36,8 @@ fn main() {
                      .arg("now")
                      .output()
                      .unwrap_or_else(|e| { panic!("failed to execute process: {}", e) });
-            let strStdout = String::from_utf8(output.stdout).unwrap();
-            client.text(strStdout)
+            let str_stdout = String::from_utf8(output.stdout).unwrap();
+            client.text(str_stdout)
             // client.empty()
         })
     });
