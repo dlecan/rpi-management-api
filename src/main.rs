@@ -9,7 +9,9 @@ use iron::Iron;
 use rustless::{
     Application, Api, Nesting, Versioning
 };
+use rustless::server::header::AccessControlAllowOrigin;
 use rustc_serialize::json::ToJson;
+use std::process::Command;
 
 fn main() {
 
@@ -18,9 +20,18 @@ fn main() {
   let api = Api::build(|api| {
 
     api.post("shutdown", |endpoint| {
-        endpoint.handle(|client, params| {
+        endpoint.handle(|mut client, params| {
             println!("Shutdown requested");
-            client.empty()
+            client.set_header(AccessControlAllowOrigin::Any);
+
+            let output = Command::new("shutdown")
+                     .arg("-h")
+                     .arg("now")
+                     .output()
+                     .unwrap_or_else(|e| { panic!("failed to execute process: {}", e) });
+            let strStdout = String::from_utf8(output.stdout).unwrap();
+            client.text(strStdout)
+            // client.empty()
         })
     });
   });
