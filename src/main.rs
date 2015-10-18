@@ -19,11 +19,15 @@ fn main() {
 
     let api = Api::build(|api| {
 
+        api.before(|mut client, _params| {
+            client.set_header(AccessControlAllowOrigin::Any);
+            Ok(())
+        });
+
         api.namespace("health", |health_ns| {
 
             health_ns.get("ping", |endpoint| {
-                endpoint.handle(|mut client, params| {
-                    client.set_header(AccessControlAllowOrigin::Any);
+                endpoint.handle(|client, _params| {
                     client.empty()
                 })
             });
@@ -33,9 +37,8 @@ fn main() {
         api.namespace("system", |system_ns| {
 
             system_ns.post("shutdown", |endpoint| {
-                endpoint.handle(|mut client, params| {
+                endpoint.handle(|mut client, _params| {
                     println!("Shutdown requested...");
-                    client.set_header(AccessControlAllowOrigin::Any);
 
                     let output = Command::new("shutdown")
                         .arg("-h")
