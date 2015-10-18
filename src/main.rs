@@ -68,6 +68,6 @@ fn main() {
 
     let app = Application::new(api);
 
-    Iron::new(app).http("localhost:4000").unwrap();
+    Iron::new(app).http("0.0.0.0:4000").unwrap();
 
 }
