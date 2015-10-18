@@ -19,39 +19,48 @@ fn main() {
 
     let api = Api::build(|api| {
 
-        api.get("ping", |endpoint| {
-            endpoint.handle(|mut client, params| {
-                client.set_header(AccessControlAllowOrigin::Any);
-                client.empty()
-            })
-        });
+        api.namespace("health", |health_ns| {
 
-        api.post("shutdown", |endpoint| {
-            endpoint.handle(|mut client, params| {
-                println!("Shutdown requested...");
-                client.set_header(AccessControlAllowOrigin::Any);
-
-                let output = Command::new("shutdown")
-                    .arg("-h")
-                    .arg("now")
-                    .output()
-                    .unwrap_or_else(|e| { panic!("failed to execute process: {}", e) });
-
-                if output.status.success() {
-                    let str_stdout = String::from_utf8(output.stdout).unwrap();
-                    println!("Shutdown accepted: {}", str_stdout);
-
-                    client.set_status(StatusCode::NoContent);
+            health_ns.get("ping", |endpoint| {
+                endpoint.handle(|mut client, params| {
+                    client.set_header(AccessControlAllowOrigin::Any);
                     client.empty()
-                } else {
-                    let str_stderr = String::from_utf8(output.stderr).unwrap();
-                    println!("Shutdown rejected: {}", str_stderr);
+                })
+            });
 
-                    client.unauthorized();
-                    client.text(str_stderr)
-                }
-            })
         });
+
+        api.namespace("system", |system_ns| {
+
+            system_ns.post("shutdown", |endpoint| {
+                endpoint.handle(|mut client, params| {
+                    println!("Shutdown requested...");
+                    client.set_header(AccessControlAllowOrigin::Any);
+
+                    let output = Command::new("shutdown")
+                        .arg("-h")
+                        .arg("now")
+                        .output()
+                        .unwrap_or_else(|e| { panic!("failed to execute process: {}", e) });
+
+                    if output.status.success() {
+                        let str_stdout = String::from_utf8(output.stdout).unwrap();
+                        println!("Shutdown accepted: {}", str_stdout);
+
+                        client.set_status(StatusCode::NoContent);
+                        client.empty()
+                    } else {
+                        let str_stderr = String::from_utf8(output.stderr).unwrap();
+                        println!("Shutdown rejected: {}", str_stderr);
+
+                        client.unauthorized();
+                        client.text(str_stderr)
+                    }
+                })
+            });
+
+        });
+
     });
 
     let app = Application::new(api);
