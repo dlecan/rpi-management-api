@@ -8,6 +8,7 @@ use iron::Iron;
 use rustless::{
     Application, Api, Nesting, Versioning
 };
+use rustless::framework::endpoint::*;
 use rustless::server::header::AccessControlAllowOrigin;
 use rustless::server::status::*;
 use rustc_serialize::json::ToJson;
@@ -18,6 +19,8 @@ fn main() {
     println!("Starting RPI Management ...");
 
     let api = Api::build(|api| {
+
+        api.prefix("api");
 
         api.before(|mut client, _params| {
             client.set_header(AccessControlAllowOrigin::Any);
@@ -56,11 +59,14 @@ fn main() {
 
         api.namespace("health", |health_ns| {
 
-            health_ns.get("ping", |endpoint| {
+            let ping = |endpoint: &mut Endpoint| -> EndpointHandlerPresent {
                 endpoint.handle(|client, _params| {
                     client.empty()
                 })
-            });
+            };
+
+            health_ns.get("ping", &ping);
+            health_ns.head("ping", &ping);
 
         });
 
