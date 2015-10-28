@@ -5,8 +5,8 @@ dependencies = [
  "hyper 0.6.8 (registry+https://github.com/rust-lang/crates.io-index)",
  "iron 0.1.20 (registry+https://github.com/rust-lang/crates.io-index)",
  "rustc-serialize 0.3.15 (registry+https://github.com/rust-lang/crates.io-index)",
- "rustless 0.7.0 (git+https://github.com/rustless/rustless)",
- "valico 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "rustless 0.7.0 (git+https://github.com/dlecan/rustless)",
+ "valico 0.8.0 (git+https://github.com/rustless/valico)",
 ]
 
 [[package]]
@@ -345,7 +345,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 [[package]]
 name = "rustless"
 version = "0.7.0"
-source = "git+https://github.com/rustless/rustless#44c0687276861d59f07ab6f60e4a57ef330869b9"
+source = "git+https://github.com/dlecan/rustless#078ced17099e21197442cf04fc2946bbc94427cf"
 dependencies = [
  "bodyparser 0.0.6 (registry+https://github.com/rust-lang/crates.io-index)",
  "cookie 0.1.21 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -363,7 +363,7 @@ dependencies = [
  "typeable 0.1.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "typemap 0.3.3 (registry+https://github.com/rust-lang/crates.io-index)",
  "url 0.2.37 (registry+https://github.com/rust-lang/crates.io-index)",
- "valico 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "valico 0.8.0 (git+https://github.com/rustless/valico)",
 ]
 
 [[package]]
@@ -450,7 +450,7 @@ dependencies = [
 [[package]]
 name = "valico"
 version = "0.8.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
+source = "git+https://github.com/rustless/valico#f5d896a220b29927ea866b47b06d82586b32ded5"
 dependencies = [
  "jsonway 0.3.4 (registry+https://github.com/rust-lang/crates.io-index)",
  "lazy_static 0.1.14 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -458,7 +458,7 @@ dependencies = [
  "phf_codegen 0.7.4 (registry+https://github.com/rust-lang/crates.io-index)",
  "regex 0.1.41 (registry+https://github.com/rust-lang/crates.io-index)",
  "rustc-serialize 0.3.15 (registry+https://github.com/rust-lang/crates.io-index)",
- "traitobject 0.0.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "traitobject 0.0.3 (registry+https://github.com/rust-lang/crates.io-index)",
  "typeable 0.1.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "url 0.2.37 (registry+https://github.com/rust-lang/crates.io-index)",
  "uuid 0.1.17 (registry+https://github.com/rust-lang/crates.io-index)",

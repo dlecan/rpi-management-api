@@ -4,9 +4,15 @@ version = "0.1.0"
 authors = ["Damien Lecan <dev@dlecan.com>"]
 
 [dependencies]
-rustless = { git = "https://github.com/rustless/rustless" }
 rustc-serialize = "*"
-valico = "*"
+
+[dependencies.rustless]
+git = "https://github.com/dlecan/rustless"
+ref = "078ced17099e21197442cf04fc2946bbc94427cf"
+
+[dependencies.valico]
+git = "https://github.com/rustless/valico"
+ref = "f5d896a220b29927ea866b47b06d82586b32ded5"
 
 [dependencies.hyper]
 version = "*"
